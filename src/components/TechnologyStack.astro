@@ -1,0 +1,198 @@
+---
+import AlpineJS from "@/icons/brands/AlpineJS.astro";
+import AstroBrand from "@/icons/brands/AstroBrand.astro";
+import Firebase from "@/icons/brands/Firebase.astro";
+import Git from "@/icons/brands/Git.astro";
+import GitHub from "@/icons/brands/GitHub.astro";
+import JavaScript from "@/icons/brands/JavaScript.astro";
+import JQuery from "@/icons/brands/jQuery.astro";
+import Laravel from "@/icons/brands/Laravel.astro";
+import Livewire from "@/icons/brands/Livewire.astro";
+import MongoDB from "@/icons/brands/MongoDB.astro";
+import MySQL from "@/icons/brands/MySQL.astro";
+import NodeJS from "@/icons/brands/NodeJS.astro";
+import PHP from "@/icons/brands/PHP.astro";
+import PostgreSQL from "@/icons/brands/PostgreSQL.astro";
+import Postman from "@/icons/brands/Postman.astro";
+import React from "@/icons/brands/React.astro";
+import Tailwind from "@/icons/brands/Tailwind.astro";
+import TypeScript from "@/icons/brands/TypeScript.astro";
+import VSCode from "@/icons/brands/VSCode.astro";
+import VueJS from "@/icons/brands/VueJS.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const BRANDS = {
+    // Languages
+    PHP: {
+        name: "PHP",
+        icon: PHP,
+        class: "border-[#777bb3]",
+    },
+    JAVASCRIPT: {
+        name: "JavaScript",
+        icon: JavaScript,
+        class: "border-[#F0DB4F]",
+    },
+    TYPESCRIPT: {
+        name: "TypeScript",
+        icon: TypeScript,
+        class: "border-[#007acc]",
+    },
+    // Frontend
+    VUE: {
+        name: "Vue.js",
+        icon: VueJS,
+        class: "border-[#41b883]",
+    },
+    REACT: {
+        name: "React",
+        icon: React,
+        class: "border-[#61DAFB]",
+    },
+    ASTRO: {
+        name: "Astro",
+        icon: AstroBrand,
+        class: "border-[#181616] dark:border-[var(--azure-radiance-50)]",
+    },
+    ALPINE: {
+        name: "Alpine.js",
+        icon: AlpineJS,
+        class: "border-[#77c1d2]",
+    },
+    LIVEWIRE: {
+        name: "Livewire",
+        icon: Livewire,
+        class: "border-[#fb70a9]",
+    },
+    JQUERY: {
+        name: "jQuery",
+        class: "border-[#0868AC]",
+        icon: JQuery,
+    },
+    TAILWIND: {
+        name: "Tailwind",
+        icon: Tailwind,
+        class: "border-[#38bdf8]",
+    },
+    // Backend
+    LARAVEL: {
+        name: "Laravel",
+        icon: Laravel,
+        class: "border-[#F05340]",
+    },
+    NODE: {
+        name: "Node.js",
+        icon: NodeJS,
+        class: "border-[#83CD29]",
+    },
+    // Databases
+    MYSQL: {
+        name: "MySQL",
+        icon: MySQL,
+        class: "border-[#00618A]",
+    },
+    POSTGRESQL: {
+        name: "PostgreSQL",
+        icon: PostgreSQL,
+        class: "border-[#28537e]",
+    },
+    MONGODB: {
+        name: "MongoDB",
+        icon: MongoDB,
+        class: "",
+    },
+    FIREBASE: {
+        name: "Realtime Database",
+        icon: Firebase,
+        class: "border-[#f58220]",
+    },
+    // Tools
+    VSCODE: {
+        name: "VS Code",
+        icon: VSCode,
+        class: "border-[#1F9CF0]",
+    },
+    GIT: {
+        name: "Git",
+        icon: Git,
+        class: "border-[#F34F29]",
+    },
+    GITHUB: {
+        name: "GitHub",
+        icon: GitHub,
+        class: "border-[#181616] dark:border-[var(--azure-radiance-50)]",
+    },
+    POSTMAN: {
+        name: "Postman",
+        icon: Postman,
+        class: "border-[#f37036]",
+    },
+};
+
+const TECHNOLOGY_STACK = [
+    {
+        name: t("technology-stack.languages"),
+        items: [BRANDS.PHP, BRANDS.JAVASCRIPT, BRANDS.TYPESCRIPT],
+    },
+    {
+        name: t("technology-stack.fronted"),
+        items: [
+            BRANDS.VUE,
+            BRANDS.LIVEWIRE,
+            // BRANDS.REACT,
+            BRANDS.ALPINE,
+            BRANDS.JQUERY,
+            BRANDS.ASTRO,
+            BRANDS.TAILWIND,
+        ],
+    },
+    {
+        name: t("technology-stack.backend"),
+        items: [
+            BRANDS.LARAVEL,
+            // BRANDS.NODE
+        ],
+    },
+    {
+        name: t("technology-stack.database"),
+        items: [
+            BRANDS.MYSQL,
+            // BRANDS.POSTGRESQL,
+            // BRANDS.MONGODB,
+            BRANDS.FIREBASE,
+        ],
+    },
+    {
+        name: t("technology-stack.tools"),
+        items: [BRANDS.VSCODE, BRANDS.GIT, BRANDS.GITHUB, BRANDS.POSTMAN],
+    },
+];
+---
+
+<div class="flex flex-col gap-6 md:gap-8 items-center">
+    {
+        TECHNOLOGY_STACK.map(({ name, items }) => (
+            <div class="flex flex-col gap-4 items-center">
+                <h2 class="text-2xl font-bold text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]">
+                    {name}
+                </h2>
+                <div class="flex gap-4 flex-wrap justify-center">
+                    {items.map((item) => (
+                        <div
+                            class={`${item.class} flex items-center gap-2 py-2 md:py-3 px-3 md:px-4 rounded-full border-2`}
+                        >
+                            {item.icon && (
+                                <item.icon class="size-4 md:size-5" />
+                            )}
+                            <p class="text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] tracking-wide font-semibold text-xs md:text-sm text-nowrap">
+                                {item.name}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        ))
+    }
+</div>

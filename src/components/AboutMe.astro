@@ -1,0 +1,56 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<div class="flex flex-col md:flex-row gap-4 items-center h-min">
+    <div class="flex flex-col gap-4">
+        <p
+            class="text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+        >
+            {t("about-me.paragraph-1-part-1")}
+            <strong
+                class="text-[var(--azure-radiance-300)] dark:text-[var(--azure-radiance-600)"
+            >
+                {t("about-me.underlined-1")}
+            </strong>
+            {t("about-me.paragraph-1-part-2")}.
+        </p>
+        <p
+            class="text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+        >
+            {t("about-me.paragraph-2-part-1")}
+            <strong
+                class="text-[var(--azure-radiance-300)] dark:text-[var(--azure-radiance-600)"
+            >
+                {t("about-me.underlined-2")}.
+            </strong>
+            {t("about-me.paragraph-2-part-2")}.
+        </p>
+        <p
+            class="text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+        >
+            {t("about-me.paragraph-3")}
+        </p>
+    </div>
+    <img
+        class="size-7/12 md:size-4/12 about-me-image mt-8 md:-mt-8"
+        src="/jehicoob.webp"
+        alt="Foto de Jehicoob"
+    />
+</div>
+
+<style scoped>
+    @media (prefers-color-scheme: dark) {
+        .about-me-image {
+            mask-image: linear-gradient(black 90%, transparent);
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        .about-me-image {
+            mask-image: linear-gradient(white 90%, transparent);
+        }
+    }
+</style>

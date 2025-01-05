@@ -1,0 +1,280 @@
+---
+import Laravel from "@/icons/brands/Laravel.astro";
+import MySQL from "@/icons/brands/MySQL.astro";
+import Tailwind from "@/icons/brands/Tailwind.astro";
+import AlpineJS from "@/icons/brands/AlpineJS.astro";
+import Livewire from "@/icons/brands/Livewire.astro";
+import VueJS from "@/icons/brands/VueJS.astro";
+import Git from "@/icons/brands/GitHub.astro";
+import Firebase from "@/icons/brands/Firebase.astro";
+import JQuery from "@/icons/brands/jQuery.astro";
+import JavaScript from "@/icons/brands/JavaScript.astro";
+import PointIcon from "@/icons/PointIcon.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const TOOLS = {
+    LARAVEL: {
+        name: "Laravel",
+        class: "border-[#fc0f1a]",
+        icon: Laravel,
+    },
+    MYSQL: {
+        name: "MySQL",
+        class: "bg-[#00758F]",
+        icon: MySQL,
+    },
+    TAILWIND: {
+        name: "Tailwind CSS",
+        class: "border-[#38bdf8]",
+        icon: Tailwind,
+    },
+    ALPINE: {
+        name: "Alpine.js",
+        class: "bg-[#2D3748]",
+        icon: AlpineJS,
+    },
+    LIVEWIRE: {
+        name: "Livewire",
+        class: "bg-[#4A5568]",
+        icon: Livewire,
+    },
+    VUE: {
+        name: "Vue.js",
+        class: "border-[#42b883]",
+        icon: VueJS,
+    },
+    GIT: {
+        name: "Git",
+        class: "bg-orange-600",
+        icon: Git,
+    },
+    FIREBASE: {
+        name: "Firebase",
+        class: "border-[#feb90b]",
+        icon: Firebase,
+    },
+    JQUERY: {
+        name: "jQuery",
+        class: "border-[#0868AC]",
+        icon: JQuery,
+    },
+    JAVASCRIPT: {
+        name: "JavaScript",
+        class: "border-[#f7df1e]",
+        icon: JavaScript,
+    },
+};
+
+const PROJECTS = [
+    {
+        id: "chat",
+        title: t("projects.chat-title"),
+        description: t("projects.chat-description"),
+        images: [
+            {
+                url: "/chat/chat-1.webp",
+                alt: "Previsualización general del chat empresarial",
+            },
+            {
+                url: "/chat/chat-2.webp",
+                alt: "Previsualización del chat empresarial con envío de archivos, audios e imágenes",
+            },
+            {
+                url: "/chat/chat-3.webp",
+                alt: "Previsualización del chat empresarial version burbuja para usuarios específicos",
+            },
+        ],
+        tags: [TOOLS.VUE, TOOLS.FIREBASE, TOOLS.TAILWIND],
+    },
+    {
+        id: "system",
+        title: t("projects.system-title"),
+        description: t("projects.system-description"),
+        images: [
+            {
+                url: "/system/system-1.webp",
+                alt: "Previsualización general de la plataforma de gestión empresarial",
+            },
+            {
+                url: "/system/system-2.webp",
+                alt: "Previsualización de la integración del chat en la plataforma de gestión empresarial",
+            },
+        ],
+        tags: [TOOLS.LARAVEL, TOOLS.JQUERY, TOOLS.JAVASCRIPT],
+    },
+];
+---
+
+<div class="flex flex-col gap-10 md:gap-8">
+    {
+        PROJECTS.map(({ id, title, description, images, tags }) => (
+            <div class="flex flex-col items-center space-x-0 space-y-4 md:flex-row md:space-x-8 md:space-y-0 group">
+                <div class="flex flex-col gap-2 w-full md:w-1/2">
+                    <div
+                        id="images-container"
+                        data-container={id}
+                        class="w-full overflow-hidden rounded-xl"
+                    >
+                        <div
+                            id="images-track"
+                            data-track={id}
+                            class="relative flex items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl rounded-xl sm:rounded-xl"
+                        >
+                            {images.map(({ url, alt }) => (
+                                <img
+                                    alt={alt}
+                                    class="object-cover object-top w-full  transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+                                    loading="lazy"
+                                    src={url}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <ul class="flex items-center gap-2 mx-auto w-min">
+                            {images.map(({ url }, index) => (
+                                <li>
+                                    <button
+                                        type="button"
+                                        {...{ [`data-index-${id}`]: index }}
+                                        class="text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+                                    >
+                                        <PointIcon class="size-4" />
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 md:max-w-lg flex flex-col gap-4">
+                    <h3 class="text-2xl font-bold text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]">
+                        {title}
+                    </h3>
+
+                    <ul class="flex flex-row gap-x-2 md:gap-x-4">
+                        {tags.map((tag) => (
+                            <li>
+                                <span
+                                    class={`${tag.class} flex gap-x-2 rounded-full text-xs md:text-sm text-nowrap tracking-wide font-semibold py-2 px-4 border-2 text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]`}
+                                >
+                                    <tag.icon class="size-4 md:size-5" />
+                                    {tag.name}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div class="text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]">
+                        {description}
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+</div>
+
+<script>
+    const imagesContainers =
+        document.querySelectorAll<HTMLElement>("[data-container]");
+
+    if (imagesContainers) {
+        imagesContainers.forEach((imagesContainer) => {
+            // Este id se necesita para identificar los botones
+            const imagesId = imagesContainer.getAttribute("data-container");
+
+            // Botones de la contenedor
+            const containerButtons =
+                document.querySelectorAll<HTMLButtonElement>(
+                    `[data-index-${imagesId}]`
+                );
+
+            const imagesTrack =
+                imagesContainer.querySelector<HTMLElement>("[data-track]");
+            const images =
+                imagesContainer.querySelectorAll<HTMLImageElement>("img");
+
+            if (imagesTrack && images) {
+                // Índice de la imagen actual
+                let currentIndex = 0;
+
+                setActiveButton(currentIndex);
+
+                // Número total de imágenes
+                const totalImages = images.length;
+
+                // Ancho del contenedor (asumiendo que todas las imágenes tienen el mismo tamaño que el contenedor)
+                const containerWidth =
+                    imagesContainer.getBoundingClientRect().width;
+
+                // Calcular el tamaño de cada zona basado en el número de imágenes
+                const zoneWidth = containerWidth / totalImages;
+
+                function setActiveButton(index: number): void {
+                    containerButtons.forEach((button) => {
+                        button.classList.remove(
+                            "scale-125",
+                            "text-[var(--azure-radiance-600)]"
+                        );
+                    });
+                    containerButtons[index].classList.add(
+                        "scale-125",
+                        "text-[var(--azure-radiance-600)]"
+                    );
+                }
+
+                setActiveButton(currentIndex);
+
+                function setTranslation(index: number): void {
+                    // Calcular el desplazamiento en función del índice actual
+                    const translateX = -(index * 100);
+                    const rem = index * 2;
+                    imagesTrack!.style.transform = `translateX(calc(${translateX}% - ${rem}rem))`;
+                    setActiveButton(index);
+                }
+
+                if (containerButtons && imagesId) {
+                    containerButtons.forEach((button) => {
+                        button.addEventListener("click", (evt) => {
+                            const targetButton = (
+                                evt.target as Element
+                            ).closest("button");
+
+                            if (targetButton) {
+                                const index = Number(
+                                    targetButton.getAttribute(
+                                        `data-index-${imagesId}`
+                                    )
+                                );
+                                currentIndex = index;
+                                setTranslation(currentIndex);
+                            }
+                        });
+                    });
+                }
+
+                imagesContainer.addEventListener(
+                    "mousemove",
+                    (evt: MouseEvent): void => {
+                        const mouseX =
+                            evt.clientX -
+                            imagesContainer.getBoundingClientRect().left;
+
+                        // Determinar el nuevo índice en función de la posición del mouse
+                        const newIndex = Math.floor(mouseX / zoneWidth);
+
+                        if (
+                            newIndex !== currentIndex &&
+                            newIndex >= 0 &&
+                            newIndex < totalImages
+                        ) {
+                            currentIndex = newIndex;
+                            setTranslation(currentIndex);
+                        }
+                    }
+                );
+            }
+        });
+    }
+</script>

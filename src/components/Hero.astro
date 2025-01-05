@@ -1,0 +1,77 @@
+---
+import GitHub from "@/icons/brands/GitHub.astro";
+import LinkedIn from "@/icons/brands/LinkedIn.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const SOCIALS = [
+    {
+        name: "GitHub",
+        icon: GitHub,
+        url: "https://github.com/jehicoob",
+        class: "border-[#181616] text-[var(--azure-radiance-950)] hover:bg-[#181616]/10 dark:text-[var(--azure-radiance-50)] dark:border-[var(--azure-radiance-50)]",
+    },
+    {
+        name: "LinkedIn",
+        icon: LinkedIn,
+        url: "https://linkedin.com/in/jehicoob",
+        class: "border-[#0076b2] text-[var(--azure-radiance-950)] hover:bg-[#0076b2]/10 dark:text-[var(--azure-radiance-50)]",
+    },
+];
+---
+
+<div class="flex flex-col md:flex-row gap-10 items-center justify-center">
+    <img
+        class="profile-image size-7/12 md:size-5/12 bg-[var(--azure-radiance-200)] dark:bg-[var(--azure-radiance-300)]"
+        src="/jehicoob.webp"
+        alt="Foto de Jehicoob"
+    />
+
+    <div class="flex flex-col gap-4 md:gap-5 px-6 md:px-0">
+        <h1
+            class="font-bold tracking-tight text-5xl sm:text-6xl text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+        >
+            Jehicoob López
+        </h1>
+
+        <h2
+            class="text-3xl font-bold tracking-tight sm:text-5xl text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]"
+        >
+            {t("hero.description.profession")}
+        </h2>
+        <p
+            class="text-xl text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]"
+        >
+            {t("hero.description.part-1")}
+            <strong
+                class="text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]"
+            >
+                {t("hero.description.degree")}
+            </strong>
+            {t("hero.description.part-2")}
+        </p>
+        <nav class="flex flex-wrap gap-4 items-center mt-2 md:mt-0">
+            {
+                SOCIALS.map((social) => (
+                    <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        role="link"
+                        class={`${social.class} transition border tracking-wide rounded-full inline-flex items-center justify-center gap-2 px-4 py-2 `}
+                    >
+                        <social.icon class={`size-6`} />
+                        {social.name}
+                    </a>
+                ))
+            }
+        </nav>
+    </div>
+</div>
+
+<style scoped>
+    .profile-image {
+        border-radius: 52% 48% 48% 52% / 59% 39% 61% 41%;
+    }
+</style>

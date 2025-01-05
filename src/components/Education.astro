@@ -1,0 +1,56 @@
+---
+import Sena from "@/icons/schools/Sena.astro";
+import Univalle from "@/icons/schools/Univalle.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const STUDIES = [
+    {
+        institution: t("education.education-1-name"),
+        icon: Univalle,
+        classIcon: "univalle-drop-shadow",
+        degree: t("education.education-1-degree"),
+        start: t("education.education-1-start"),
+        end: t("education.education-1-end"),
+        description: t("education.education-1-description"),
+    },
+    {
+        institution: t("education.education-2-name"),
+        icon: Sena,
+        classIcon: "sena-drop-shadow",
+        degree: t("education.education-2-degree"),
+        start: t("education.education-2-start"),
+        end: t("education.education-2-end"),
+        description: t("education.education-2-description"),
+    },
+];
+---
+
+<div class="flex flex-col gap-4">
+    {
+        STUDIES.map((study) => (
+            <div class="flex flex-col items-center space-x-0 md:flex-row md:space-x-8 group">
+                <div class="w-full md:w-1/4 flex justify-center">
+                    <div class="p-2 w-min rounded-lg">
+                        <study.icon class={`h-40 w-auto ${study.classIcon}`} />
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 rounded-lg p-5 w-full md:w-3/4">
+                    <h2 class="text-2xl font-semibold text-pretty text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]">
+                        {study.degree}
+                    </h2>
+                    <h3 class="text-lg font-semibold text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]">
+                        {study.institution}
+                    </h3>
+                    <time class="mb-1 text-sm font-normal leading-none italic text-[var(--iron-900)] dark:text-[var(--azure-radiance-50)]">
+                        {study.start} - {study.end}
+                    </time>
+                    <p class="text-base font-normal text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] mt-2 md:mt-0">
+                        {study.description}
+                    </p>
+                </div>
+            </div>
+        ))
+    }
+</div>

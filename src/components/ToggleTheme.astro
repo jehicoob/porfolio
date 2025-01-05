@@ -1,0 +1,30 @@
+---
+import MoonStarsIcon from "@/icons/MoonStarsIcon.astro";
+import SunIcon from "@/icons/SunIcon.astro";
+---
+
+<button
+    type="button"
+    id="theme-selector"
+    class="flex justify-center items-center p-2 text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] hover:text-[var(--azure-radiance-600)] dark:hover:text-[var(--azure-radiance-300)]"
+>
+    <MoonStarsIcon class="hidden dark:inline size-6" />
+    <SunIcon class="inline dark:hidden size-6" />
+</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const theme = localStorage.theme || "dark";
+        document.documentElement.classList.toggle("dark", theme === "dark");
+    });
+
+    document.getElementById("theme-selector")?.addEventListener("click", () => {
+        if (localStorage.theme === "dark") {
+            localStorage.theme = "light";
+            document.documentElement.classList.remove("dark");
+        } else {
+            localStorage.theme = "dark";
+            document.documentElement.classList.add("dark");
+        }
+    });
+</script>

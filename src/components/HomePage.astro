@@ -1,0 +1,90 @@
+---
+import SectionContainer from "@/components/SectionContainer.astro";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import TitleSection from "@/components/TitleSection.astro";
+import BriefcaseIcon from "@/icons/BriefcaseIcon.astro";
+import CodeIcon from "@/icons/CodeIcon.astro";
+import UserIcon from "@/icons/UserIcon.astro";
+import Experience from "@/components/Experience.astro";
+import Projects from "@/components/Projects.astro";
+import SchoolIcon from "@/icons/SchoolIcon.astro";
+import Education from "@/components/Education.astro";
+import StackIcon from "@/icons/StackIcon.astro";
+import TechnologyStack from "@/components/TechnologyStack.astro";
+import CertificateIcon from "@/icons/CertificateIcon.astro";
+import Certificates from "@/components/Certificates.astro";
+import AboutMe from "@/components/AboutMe.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout
+    title={t("home-page.title")}
+    description={t("home-page.description")}
+>
+    <main>
+        <section
+            class="mt-20 md:mt-40 scroll-m-20 w-full mx-auto container lg:max-w-6xl md:max-w-2xl"
+        >
+            <Hero />
+        </section>
+    </main>
+
+    <div class="space-y-24 my-16 md:my-44">
+        <SectionContainer id="experience">
+            <TitleSection>
+                <BriefcaseIcon class="section-icon size-8" />
+                {t("home-page.experience")}
+            </TitleSection>
+            <Experience />
+        </SectionContainer>
+
+        <SectionContainer id="projects">
+            <TitleSection>
+                <CodeIcon class="section-icon size-8" />
+                {t("home-page.projects")}
+            </TitleSection>
+            <Projects />
+        </SectionContainer>
+
+        <SectionContainer id="technology-stack">
+            <TitleSection>
+                <StackIcon class="section-icon size-8" />
+                {t("home-page.technologyStack")}
+            </TitleSection>
+            <TechnologyStack />
+        </SectionContainer>
+
+        <SectionContainer id="education">
+            <TitleSection>
+                <SchoolIcon class="section-icon size-8" />
+                {t("home-page.education")}
+            </TitleSection>
+            <Education />
+        </SectionContainer>
+
+        <SectionContainer id="certificates">
+            <TitleSection>
+                <CertificateIcon class="section-icon size-8" />
+                {t("home-page.certificates")}
+            </TitleSection>
+            <Certificates />
+        </SectionContainer>
+
+        <SectionContainer id="about-me">
+            <TitleSection>
+                <UserIcon class="section-icon size-8" />
+                {t("home-page.aboutMe")}
+            </TitleSection>
+            <AboutMe />
+        </SectionContainer>
+    </div>
+</Layout>
+
+<style>
+    .section-icon {
+        @apply text-[var(--azure-radiance-600)]  dark:text-[var(--azure-radiance-300)];
+    }
+</style>

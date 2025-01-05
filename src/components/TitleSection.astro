@@ -1,0 +1,11 @@
+<h2
+    class={`flex items-center mb-10 text-3xl font-semibold gap-x-3 ${Astro.props.className}`}
+>
+    <slot />
+</h2>
+
+<style scoped>
+    h2 {
+        @apply text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)];
+    }
+</style>

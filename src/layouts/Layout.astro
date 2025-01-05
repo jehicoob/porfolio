@@ -1,50 +1,99 @@
 ---
+import Footer from "@/components/Footer.astro";
+import Header from "../components/Header.astro";
+
+const lang = Astro.currentLocale || "es";
+
 interface Props {
-	title: string;
+    title: string;
+    description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Astro description"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width"
+        />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/favicon.svg"
+        />
+        <meta
+            name="generator"
+            content={Astro.generator}
+        />
+        <title>{title}</title>
+    </head>
+    <body class="relative">
+        <!-- bg in dark mode -->
+        <div
+            class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] hidden dark:inline"
+        >
+        </div>
+
+        <!-- bg in light mode -->
+        <div
+            class="dark:hidden absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
+        >
+        </div>
+        <Header />
+        <slot />
+        <Footer />
+    </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+    :root {
+        --iron-50: #f7f7f7;
+        --iron-100: #ededed;
+        --iron-200: #dfdfdf;
+        --iron-300: #cdcdcd;
+        --iron-400: #adadad;
+        --iron-500: #999999;
+        --iron-600: #888888;
+        --iron-700: #7b7b7b;
+        --iron-800: #676767;
+        --iron-900: #545454;
+        --iron-950: #363636;
+
+        --azure-radiance-50: #f1f5fd;
+        --azure-radiance-100: #dfeafa;
+        --azure-radiance-200: #c6daf7;
+        --azure-radiance-300: #9ec2f2;
+        --azure-radiance-400: #70a2ea;
+        --azure-radiance-500: #4e80e2;
+        --azure-radiance-600: #3a64d6;
+        --azure-radiance-700: #3151c4;
+        --azure-radiance-800: #2d43a0;
+        --azure-radiance-900: #293c7f;
+        --azure-radiance-950: #1d274e;
+    }
+
+    html {
+        font-family: system-ui, sans-serif;
+        color-scheme: light dark;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        color: rgba(17, 17, 17, 0.9);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overscroll-behavior: none;
+    }
+
+    .github-brand {
+        @apply fill-[#181616] dark:fill-[var(--azure-radiance-50)];
+    }
 </style>

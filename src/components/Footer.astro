@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<footer
+    class="opacity-80 px-4 mt-4 mb-4 md:mt-16 md:mb-10 w-full mx-auto container lg:max-w-4xl md:max-w-2xl flex justify-center"
+>
+    <div
+        class="rounded-lg w-full max-w-screen-xl mx-auto md:flex md:items-center md:justify-between py-4 text-center"
+    >
+        <span
+            class="text-sm sm:text-center text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] mx-auto text-center"
+        >
+            <strong class="">{t("footer.paragraph-1")}</strong>
+            <br />
+            {t("footer.paragraph-2")}
+            <a
+                href="https://porfolio.dev/"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="hover:underline"
+                ><strong>Midudev</strong></a
+            >, {t("footer.paragraph-3")}
+            <a
+                href="https://astro.build/"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="hover:underline"
+                ><strong>Astro</strong></a
+            >
+            {t("footer.paragraph-4")}
+            <a
+                href="https://vercel.com/home"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="hover:underline"
+                ><strong>Vercel</strong></a
+            >.
+        </span>
+    </div>
+</footer>

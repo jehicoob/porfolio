@@ -1,0 +1,29 @@
+---
+import { languages } from "@/i18n/ui";
+import { getLangFromUrl } from "@/i18n/utils";
+
+const currentLang = getLangFromUrl(Astro.url);
+
+const languagesList = Object.entries(languages).map(([lang, name]) => {
+    return {
+        lang,
+        name,
+        isActive: lang === currentLang,
+    };
+});
+---
+
+{
+    languagesList.map(({ lang, name, isActive }) => (
+        <a
+            href={`/${lang}`}
+            class:list={[
+                "text-lg p-2 rounded-xl transition text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] hover:text-[var(--azure-radiance-600)] dark:hover:text-[var(--azure-radiance-300)]",
+                { hidden: isActive },
+            ]}
+            aria-label="Toggle language"
+        >
+            {name}
+        </a>
+    ))
+}

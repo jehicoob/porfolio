@@ -1,0 +1,148 @@
+---
+import ToggleTheme from "./ToggleTheme.astro";
+import MenuIcon from "@/icons/MenuIcon.astro";
+import ToggleLanguage from "./ToggleLanguage.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const currentLang = Astro.currentLocale || "es";
+
+const navItems = [
+    {
+        title: t("header.experience"),
+        label: "experience",
+        url: getRelativeLocaleUrl(currentLang, "/#experience"),
+    },
+    {
+        title: t("header.projects"),
+        label: "projects",
+        url: getRelativeLocaleUrl(currentLang, "/#projects"),
+    },
+    {
+        title: t("header.technologyStack"),
+        label: "technology-stack",
+        url: "/#technology-stack",
+    },
+    {
+        title: t("header.education"),
+        label: "education",
+        url: "/#education",
+    },
+    {
+        title: t("header.certificates"),
+        label: "certificates",
+        url: "/#certificates",
+    },
+    {
+        title: t("header.aboutMe"),
+        label: "about-me",
+        url: "/#about-me",
+    },
+    {
+        title: t("header.contact"),
+        label: "contacto",
+        url: "mailto:jehicoob.dev@gmail.com",
+    },
+];
+---
+
+<header
+    class="fixed top-0 z-10 flex items-center justify-end md:justify-center w-full mt-4 px-4"
+>
+    <div
+        id="nav-items"
+        class="relative w-full h-full hidden md:flex items-center justify-center pl-10"
+    >
+        <nav
+            class="absolute md:static -top-2 flex flex-col md:flex-row text-sm px-2 font-medium rounded-xl text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] justify-center items-center backdrop-blur border border-[var(--azure-radiance-950)] dark:border-[var(--azure-radiance-50)] shadow-[rgba(255,_255,_255,_0.1)_0px_0px_16px] right-2"
+        >
+            {
+                navItems.map((link) => (
+                    <a
+                        class="relative block px-2 py-2 transition hover:text-[var(--azure-radiance-600)] dark:hover:text-[var(--azure-radiance-300)]"
+                        aria-label={link.label}
+                        href={link.url}
+                    >
+                        {link.title}
+                    </a>
+                ))
+            }
+        </nav>
+    </div>
+
+    <div class="flex gap-2 items-center">
+        <ToggleLanguage />
+
+        <ToggleTheme />
+        <button
+            id="menu-toggle"
+            type="button"
+            class="md:hidden flex justify-center items-center p-2 text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] hover:text-[var(--azure-radiance-600)] dark:hover:text-[var(--azure-radiance-300)]"
+        >
+            <MenuIcon class="size-6" />
+        </button>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll("section");
+        const navItems = document.querySelectorAll("header nav a");
+
+        const callback = (entries: any[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    navItems.forEach((item) => {
+                        if (
+                            item.getAttribute("aria-label") == entry.target.id
+                        ) {
+                            item.classList.add(
+                                "text-[var(--azure-radiance-600)]"
+                            );
+                            item.classList.add(
+                                "dark:text-[var(--azure-radiance-300)]"
+                            );
+                        } else {
+                            item.classList.remove(
+                                "text-[var(--azure-radiance-600)]"
+                            );
+                            item.classList.remove(
+                                "dark:text-[var(--azure-radiance-300)]"
+                            );
+                        }
+                    });
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(callback, {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.3,
+        });
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Cleanup function
+        document.onvisibilitychange = () => {
+            if (document.visibilityState === "hidden") {
+                observer.disconnect();
+            } else {
+                sections.forEach((section) => {
+                    observer.observe(section);
+                });
+            }
+        };
+    });
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const navItemsContainer = document.getElementById("nav-items");
+
+    menuToggle?.addEventListener("click", () => {
+        navItemsContainer?.classList.toggle("hidden");
+    });
+</script>

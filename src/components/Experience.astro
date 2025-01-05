@@ -1,0 +1,49 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const EXPERIENCE = [
+    {
+        company: t("experience.company-1-name"),
+        position: t("experience.company-1-position"),
+        start: t("experience.company-1-start"),
+        end: t("experience.company-1-end"),
+        description: t("experience.company-1-description"),
+    },
+    {
+        company: t("experience.company-2-name"),
+        position: t("experience.company-2-position"),
+        start: t("experience.company-2-start"),
+        end: t("experience.company-2-end"),
+        description: t("experience.company-2-description"),
+    },
+];
+---
+
+<ol
+    class="ml-5 md:ml-11 pt-5 pl-4 relative border-l border-[var(--azure-radiance-100)] dark:text-[var(--azure-radiance-100)]"
+>
+    {
+        EXPERIENCE.map((experience) => (
+            <li class="mb-10 pl-5 mt-3 flex flex-col md:grid grid-cols-[40%_auto] gap-4 md:gap-x-5">
+                <div class="absolute w-5 h-5 rounded-full mt-1.5 -start-2.5 border bg-[var(--azure-radiance-100)] border-[var(--azure-radiance-600)] dark:border-[var(--azure-radiance-300)]" />
+                <div class="">
+                    <h2 class="text-2xl font-semibold text-pretty text-[var(--azure-radiance-600)] dark:text-[var(--azure-radiance-300)]">
+                        {experience.position}
+                    </h2>
+                    <h3 class="text-lg font-semibold text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]">
+                        {experience.company}
+                    </h3>
+                    <time class="mb-1 text-sm font-normal leading-none italic text-[var(--iron-900)] dark:text-[var(--azure-radiance-50)]">
+                        {experience.start} - {experience.end}
+                    </time>
+                </div>
+
+                <p class="text-base font-normal text-pretty text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)]">
+                    {experience.description}
+                </p>
+            </li>
+        ))
+    }
+</ol>

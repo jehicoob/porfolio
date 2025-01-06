@@ -53,7 +53,7 @@ const navItems = [
 >
     <div
         id="nav-items"
-        class="relative w-full h-full hidden md:flex items-center justify-center pl-10"
+        class="relative w-full h-full hidden md:flex items-center justify-center"
     >
         <nav
             class="absolute md:static -top-2 flex flex-col md:flex-row text-sm px-2 font-medium rounded-xl text-[var(--azure-radiance-950)] dark:text-[var(--azure-radiance-50)] justify-center items-center backdrop-blur border border-[var(--azure-radiance-950)] dark:border-[var(--azure-radiance-50)] shadow-[rgba(255,_255,_255,_0.1)_0px_0px_16px] right-2"
@@ -72,7 +72,7 @@ const navItems = [
         </nav>
     </div>
 
-    <div class="flex gap-2 items-center">
+    <div class="md:absolute flex gap-2 items-center md:right-4">
         <ToggleLanguage />
 
         <ToggleTheme />
